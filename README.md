@@ -14,7 +14,7 @@
     <li><h3>Creating Tasks</h3>The PM can add tasks after project creation by using the + button next to the project name.</li>
     <li><h3>Adding Point Values</h3>Every task is assigned a point value based on the perceived difficulty, this will result in those stubby little gnomes being tricked into fighting over who gets to serve you hardest.</li>
     <li><h3>Creating Teams</h3> PMs have the option to create a group (coven?) of gnomes that are automatically added to every new project they create by clicking the create team (herd?) option in the sidebar</li>
-    <li><h3>Project Editing</h3>PMs have the power to edit every aspect of the project, they can change task assignments, task points, task names, project name, people on task.</li>
+    <li><h3>Project Editing</h3>PMs have the power to edit every aspect of the project, they can change task assignments, task points, task names, project name, and add/remove <del>people</del> GNOMES on the project.</li>
   </ul>
 </p>
 <br/>
