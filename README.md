@@ -24,7 +24,7 @@
  <ul>
     <li><h3>Include Notes</h3>Gnomes can include notes on current or completed tasks, which can include current progress or taunts to competing gnomes.</li>
     <li><h3>Deselect Tasks</h3>Gnomes can deslect tasks for whatever reason, perhaps to take a higher point task or if their current task proves to difficult for their plebian little mind.</li>
-    <li><h3>Flag Issues</h3>Gnomes can flag their task if they are having issues with it with an included note that all members assigned to the task can see. Other gnomes can comment on this flag providing suggestions to the little dummy or mocking it for its failure.</li>
+    <li><h3>Flag Issues</h3>Gnomes can flag their task if they are having issues with it with an included note that all members assigned to the task can see. Other gnomes can comment on this flag providing suggestions to the little dummy or mock it for its failure.</li>
   </ul>
 </p>
 <br/>
