@@ -34,6 +34,6 @@
  <ul>
     <li><h3>Stack</h3>This app was created with React.JS, Express.JS, Node.JS, and MongoDB</li>
     <li><h3>Whats with the gnome thing?</h3>To be completely honest with you I was sleep deprived as hell and on my third coffee when I thought of the name GnomeWork and I thought it was too good to pass up on. When I realized that it was kinda stupid I was in too deep to change anything.</li>
-    <li><h3>Me</h3>If you think this is kinda funny or cool, and want to get in touch you can message me on <a href="https://www.linkedin.com/in/kavir-singh-ryerson/"  target="_blank">LinkedIn</a></li>
+    <li><h3>Me</h3>If you think this is kinda funny or cool, and want to get in touch you can message me on <a target="_blank" href="https://www.linkedin.com/in/kavir-singh-ryerson/"     >LinkedIn</a></li>
 </ul>
 </p>
