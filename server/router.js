@@ -1,19 +1,27 @@
 const express = require("express");
 const router = express.Router();
-const auth = require("./controllers/auth");
 const passportService = require("./services/passport");
 const passport = require("passport");
 
+const auth = require("./controllers/auth");
+const project = require("./controllers/project");
+const team = require("./controllers/team");
+
 const requireAuth = passport.authenticate("jwt", { session: false });
-const requireSignin = passport.authenticate("local", { session: false });
+const verifySignIn = passport.authenticate("local", { session: false });
 
 router.post("/signup", auth.signup);
-router.post("/signin", requireSignin, auth.signin);
+router.post("/signin", verifySignIn, auth.signin);
 
-router.get("/test", (req, res, next) => {
-	res.send({ helloThere: "general kenobi" });
+router.post("/project", requireAuth, project.postProject);
+router.get("/project/:type/:userID", requireAuth, project.getProjects);
+
+router.post("/team", requireAuth, team.postTeam);
+router.get("/team/:type/:userID", requireAuth, team.getTeams);
+
+router.get("/verify/:user", requireAuth, project.verifyUser);
+router.get("/test/:test", requireAuth, (req, res, next) => {
+	res.send({ helloThere: `general ${req.params.test}` });
 });
-router.get("/auth", requireAuth, (req, res, next) => {
-	res.send({ youAre: "authorized" });
-});
+
 module.exports = router;

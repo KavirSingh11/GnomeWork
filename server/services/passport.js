@@ -27,7 +27,7 @@ const localLogin = new LocalStrat(localOptions, (email, password, done) => {
 });
 
 const jwtOptions = {
-	jwtFromRequest: ExtractJwt.fromHeader("authorization"),
+	jwtFromRequest: ExtractJwt.fromHeader("auth-token"),
 	secretOrKey: config.tokenKey,
 };
 const jwtLogin = new JwtStrat(jwtOptions, (payload, done) => {
