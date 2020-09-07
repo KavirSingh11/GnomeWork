@@ -6,6 +6,8 @@ const passport = require("passport");
 const auth = require("./controllers/auth");
 const project = require("./controllers/project");
 const team = require("./controllers/team");
+const task = require("./controllers/task");
+const { getTasks } = require("./controllers/task");
 
 const requireAuth = passport.authenticate("jwt", { session: false });
 const verifySignIn = passport.authenticate("local", { session: false });
@@ -18,6 +20,9 @@ router.get("/project/:type/:userID", requireAuth, project.getProjects);
 
 router.post("/team", requireAuth, team.postTeam);
 router.get("/team/:type/:userID", requireAuth, team.getTeams);
+
+router.post("/task", requireAuth, task.postTask);
+router.get("/task/:projectID", requireAuth, task.getTasks);
 
 router.get("/verify/:user", requireAuth, project.verifyUser);
 router.get("/test/:test", requireAuth, (req, res, next) => {
