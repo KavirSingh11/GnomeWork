@@ -29,7 +29,9 @@ const signup = async (req, res, next) => {
 			await user.save();
 			res.status(200).json({
 				token: tokenForUser(user),
-				userID: user._id,
+				id: user._id,
+				name: user.name,
+				type: user.type,
 				msg: "signed up",
 			});
 		}
@@ -42,6 +44,8 @@ const signin = (req, res, next) => {
 	res.status(200).send({
 		token: tokenForUser(req.user),
 		id: req.user._id,
+		name: req.user.name,
+		type: req.user.type,
 		msg: "signed in",
 	});
 };

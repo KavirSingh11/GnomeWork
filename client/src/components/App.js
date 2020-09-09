@@ -1,32 +1,25 @@
 import React from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { connect } from "react-redux";
 
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
-
-import projectsDashboard from "./pages/projects/ProjectsDashboard";
-import projectPage from "./pages/projects/ProjectPage";
-import projectCreate from "./pages/projects/ProjectCreate";
-import projectEdit from "./pages/projects/ProjectEdit";
-
-import teamsDashboard from "./pages/teams/TeamsDashboard";
-import teamPage from "./pages/teams/TeamPage";
+import Sidebar from "./Sidebar";
 
 class App extends React.Component {
+	state = {};
+
 	render() {
 		return (
-			<BrowserRouter>
-				<Route path="/" exact component={Login} />
-				<Route path="/signup" component={Signup} />
-				<Route path="/projects/dashboard" component={projectsDashboard} />
-				<Route path="/projects/view" component={projectPage} />
-				<Route path="/projects/edit" component={projectEdit} />
-				<Route path="/projects/create" component={projectCreate} />
-				<Route path="/teams/dashboard" component={teamsDashboard} />
-				<Route path="/teams/view" component={teamPage} />
-			</BrowserRouter>
+			<div>
+				{this.props.authToken ? <Sidebar /> : null}
+				<div>{this.props.children}</div>
+			</div>
 		);
 	}
 }
 
-export default App;
+const mapStateToProps = (state) => {
+	return {
+		authToken: state.auth.authToken,
+	};
+};
+
+export default connect(mapStateToProps, {})(App);

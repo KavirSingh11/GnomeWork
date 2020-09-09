@@ -17,7 +17,7 @@ const postProject = async (req, res, next) => {
 				projectName: name,
 			});
 			await project.save();
-			res.status(200).send(`${name} added`);
+			res.status(200).send(project);
 		}
 	} catch (e) {
 		res.status(500).send(`Error: ${e.message}`);
