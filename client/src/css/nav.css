@@ -1,0 +1,50 @@
+.nav-header {
+	padding: 2rem;
+}
+
+.nav-options {
+	display: grid;
+	grid-template-rows: 2fr 1fr 1fr;
+	height: 20%;
+}
+.link {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	transition: background 0.5s ease-in-out;
+}
+.link a {
+	height: 100%;
+	width: 100%;
+	color: black;
+	background-color: inherit;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+.link:hover a {
+	transition: all 0.5s;
+	color: white;
+	background: grey;
+}
+
+.link:active {
+	background-color: rgb(80, 79, 79);
+}
+
+.signout-button {
+	color: inherit;
+	border-radius: 0;
+	background-color: inherit;
+}
+.signout-button:hover {
+	background-color: grey;
+	color: white;
+	transform: none;
+}
+.signout-button:active {
+	background-color: rgb(80, 79, 79);
+	transform: none;
+}

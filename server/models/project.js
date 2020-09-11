@@ -19,6 +19,10 @@ const ProjectSchema = new mongoose.Schema({
 	projectName: {
 		type: String,
 	},
+	completion: {
+		type: Number,
+		min: 0,
+	},
 });
 
 const Project = mongoose.model("project", ProjectSchema);

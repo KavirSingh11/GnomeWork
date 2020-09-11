@@ -15,6 +15,7 @@ const postProject = async (req, res, next) => {
 				ownerID: ownerID,
 				projectMembers: req.body.projectMembers,
 				projectName: name,
+				completion: 0,
 			});
 			await project.save();
 			res.status(200).send(project);
@@ -52,7 +53,7 @@ const verifyUser = async (req, res, next) => {
 			res.status(200).send({
 				userID: user._id,
 				userEmail: user.email,
-				userName: user.name,
+				name: user.name,
 				points: 0,
 			});
 		} else {

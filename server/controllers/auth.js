@@ -30,6 +30,7 @@ const signup = async (req, res, next) => {
 			res.status(200).json({
 				token: tokenForUser(user),
 				id: user._id,
+				email: user.email,
 				name: user.name,
 				type: user.type,
 				msg: "signed up",
@@ -44,13 +45,30 @@ const signin = (req, res, next) => {
 	res.status(200).send({
 		token: tokenForUser(req.user),
 		id: req.user._id,
+		email: req.user.email,
 		name: req.user.name,
 		type: req.user.type,
 		msg: "signed in",
 	});
 };
 
+const getUser = async (req, res, next) => {
+	const decoded = jwt.decode(req.headers.auth, keys.tokenKey);
+	const user = await User.findOne({ _id: decoded.sub });
+	try {
+		res.status(200).send({
+			id: user._id,
+			email: user.email,
+			name: user.name,
+			type: user.type,
+		});
+	} catch (e) {
+		res.status(500).send(`Error: ${e.message}`);
+	}
+};
+
 module.exports = {
 	signin,
 	signup,
+	getUser,
 };

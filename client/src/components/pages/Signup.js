@@ -1,9 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { signup } from "../../actions/authActions";
 import requireSignout from "../requireSignout";
-
+import "../../css/signup.css";
 class Signup extends React.Component {
 	state = {
 		type: 2,
@@ -35,9 +36,9 @@ class Signup extends React.Component {
 
 	handleRdbInput(e) {
 		if (e.target.value === "pm") {
-			this.setState({ type: 1 });
+			this.setState({ type: 1 }, () => console.log(this.state.type));
 		} else {
-			this.setState({ type: 2 });
+			this.setState({ type: 2 }, () => console.log(this.state.type));
 		}
 	}
 
@@ -79,7 +80,11 @@ class Signup extends React.Component {
 					</div>
 					<div onChange={(e) => this.handleRdbInput(e)}>
 						<h2>What Are You Signin Up As?</h2>
-						<div>
+						<div
+							onClick={() =>
+								this.setState({ type: 1 }, () => console.log(this.state.type))
+							}
+						>
 							<input
 								type="radio"
 								value="pm"
@@ -88,7 +93,11 @@ class Signup extends React.Component {
 							/>
 							Project Manager
 						</div>
-						<div>
+						<div
+							onClick={() =>
+								this.setState({ type: 2 }, () => console.log(this.state.type))
+							}
+						>
 							<input
 								type="radio"
 								value="gnome"
@@ -114,8 +123,11 @@ class Signup extends React.Component {
 							}
 						/>
 					</div>
-					<div>
+					<div className="signup-buttons">
 						<button onClick={() => this.handleSubmit()}>Create Account</button>
+						<Link className="login-button" to="/signin">
+							Back To Login
+						</Link>
 					</div>
 				</div>
 				{this.state.error ? (

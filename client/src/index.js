@@ -16,6 +16,8 @@ import projectEdit from "./components/pages/projects/ProjectEdit";
 import teamsDashboard from "./components/pages/teams/TeamsDashboard";
 import teamPage from "./components/pages/teams/TeamPage";
 
+import history from "./history";
+
 import App from "./components/App";
 import reducers from "./reducers";
 
@@ -24,7 +26,7 @@ const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));
 
 ReactDOM.render(
 	<Provider store={store}>
-		<BrowserRouter>
+		<BrowserRouter history={history}>
 			<App>
 				<Route path="/signin" component={Signin} />
 				<Route path="/signup" component={Signup} />

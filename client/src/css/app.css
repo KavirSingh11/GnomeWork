@@ -1,0 +1,35 @@
+html,
+body,
+#root {
+	margin: 0;
+	height: 100%;
+	font-family: "Raleway", sans-serif;
+}
+
+a {
+	text-decoration: none;
+}
+
+.app-container {
+	display: grid;
+	grid-template-columns: 1fr 5fr;
+	height: 100%;
+	width: 100%;
+}
+.auth-container {
+	height: 100%;
+	display: flex;
+	background-color: #abd1b5;
+}
+.auth-panel {
+	width: 100%;
+}
+.sidebar {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	border-right: 5px solid black;
+}
+.content-panel {
+	padding: 1rem;
+}

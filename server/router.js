@@ -14,6 +14,7 @@ const verifySignIn = passport.authenticate("local", { session: false });
 
 router.post("/signup", auth.signup);
 router.post("/signin", verifySignIn, auth.signin);
+router.get("/getUser", requireAuth, auth.getUser);
 
 router.post("/project", requireAuth, project.postProject);
 router.get("/project/:type/:userID", requireAuth, project.getProjects);
