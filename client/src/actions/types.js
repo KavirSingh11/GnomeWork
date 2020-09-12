@@ -7,3 +7,7 @@ export const GET_PROJECTS = "GET_PROJECTS";
 export const POST_PROJECT = "POST_PROJECT";
 export const SET_VIEW_PROJECT = "SET_VIEW_PROJECT";
 export const PROJECT_ERROR = "PROJECT_ERROR";
+
+export const GET_TASKS = "GET_TASKS";
+export const POST_TASK = "POST_TASK";
+export const TASK_ERROR = "TASK_ERROR";

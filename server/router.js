@@ -25,9 +25,9 @@ router.get("/team/:type/:userID", requireAuth, team.getTeams);
 router.post("/task", requireAuth, task.postTask);
 router.get("/task/:projectID", requireAuth, task.getTasks);
 
-router.get("/verify/:user", requireAuth, project.verifyUser);
-router.get("/test/:test", requireAuth, (req, res, next) => {
-	res.send({ helloThere: `general ${req.params.test}` });
+router.get("/verify/:user", project.verifyUser);
+router.get("/test/:kenobi", requireAuth, (req, res, next) => {
+	res.send({ helloThere: `general ${req.params.kenobi}` });
 });
 
 module.exports = router;

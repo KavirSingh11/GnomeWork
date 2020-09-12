@@ -1,0 +1,23 @@
+.tileboard {
+	height: 100%;
+	width: 100%;
+	background-color: #abd1b5;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	flex-wrap: wrap;
+}
+.tile {
+	margin-top: 2rem;
+	border-radius: 2.5rem;
+	padding: 1.5rem;
+	width: 12rem;
+	max-height: 12rem;
+	background-color: #291507;
+	color: #edf4ed;
+	transition: all 0.25s;
+}
+.tile:hover {
+	cursor: pointer;
+	transform: scale(1.1);
+}

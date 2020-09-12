@@ -17,7 +17,7 @@
 .link a {
 	height: 100%;
 	width: 100%;
-	color: black;
+	color: white;
 	background-color: inherit;
 	display: flex;
 	flex-direction: row;
@@ -27,7 +27,7 @@
 .link:hover a {
 	transition: all 0.5s;
 	color: white;
-	background: grey;
+	background: #79b791;
 }
 
 .link:active {

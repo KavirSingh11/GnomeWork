@@ -1,0 +1,20 @@
+.tile {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 1fr 1fr;
+	gap: 1px 1px;
+	grid-template-areas:
+		"title title"
+		"list comp";
+}
+.tile-title {
+	grid-area: title;
+}
+.tile-list {
+	grid-area: list;
+	margin-left: -1.5rem;
+}
+.tile-completion {
+	grid-area: comp;
+	padding-left: 2rem;
+}

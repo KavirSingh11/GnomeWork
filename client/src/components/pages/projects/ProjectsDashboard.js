@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import Tile from "../../PageTile";
+import Tile from "../../ProjectTile";
 import { getUser } from "../../../actions/authActions";
 import {
 	getProjects,
@@ -9,6 +9,7 @@ import {
 	setView,
 } from "../../../actions/projectActions";
 import requireSignin from "../../requireSignin";
+import "../../../css/projectdash.css";
 
 class ProjectsDashboard extends React.Component {
 	state = {};
@@ -21,11 +22,7 @@ class ProjectsDashboard extends React.Component {
 	}
 
 	async getProjects() {
-		const userData = {
-			userID: this.props.auth.userID,
-			type: this.props.auth.type,
-		};
-		await this.props.getProjects(userData);
+		await this.props.getProjects();
 	}
 	async getUserInfo() {
 		await this.props.getUser(this.props.authToken);
@@ -40,7 +37,6 @@ class ProjectsDashboard extends React.Component {
 			return (
 				<Tile
 					key={project.projectID}
-					type="project"
 					name={project.projectName}
 					id={project.projectID}
 					members={project.projectMembers}

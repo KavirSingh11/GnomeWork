@@ -28,8 +28,7 @@ a {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	border-right: 5px solid black;
-}
-.content-panel {
-	padding: 1rem;
+	border-right: 3px solid #291507;
+	background-color: #214e34;
+	color: #abd1b5;
 }

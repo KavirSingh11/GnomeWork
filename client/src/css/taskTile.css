@@ -1,0 +1,28 @@
+.task-tile {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr;
+	gap: 1px 1px;
+	grid-template-areas:
+		"Title Title Title Title"
+		"AssignedTo AssignedTo Point Point"
+		"AssignedTo AssignedTo Point Point";
+}
+.title {
+	grid-area: Title;
+}
+
+.assignedTo {
+	grid-area: AssignedTo;
+	margin-right: 1rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+.pointVal {
+	grid-area: Point;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-end;
+}

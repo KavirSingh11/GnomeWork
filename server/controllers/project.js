@@ -46,12 +46,27 @@ const getProjects = async (req, res, next) => {
 
 //Verify each user upon trying to add them to a team or project
 const verifyUser = async (req, res, next) => {
-	const email = req.params.user;
-	const user = await User.findOne({ email });
+	var user = {};
+	if (req.params.user.includes("@")) {
+		const email = req.params.user;
+		try {
+			user = await User.findOne({ email });
+		} catch (e) {
+			res.status(500).send(e);
+		}
+	} else {
+		const id = req.params.user;
+		try {
+			user = await User.findOne({ _id: id });
+		} catch (e) {
+			res.status(500).send(e);
+		}
+	}
+
 	try {
 		if (user) {
 			res.status(200).send({
-				userID: user._id,
+				id: user._id,
 				userEmail: user.email,
 				name: user.name,
 				points: 0,
