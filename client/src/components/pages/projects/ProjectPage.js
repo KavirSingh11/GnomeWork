@@ -22,10 +22,10 @@ class ProjectPage extends React.Component {
 
 	render() {
 		return (
-			<div className="project-page">
-				<h1 className="project-title">{this.props.project.projectName}</h1>
-				<div className="tile-board">{this.renderTiles()}</div>
-				<div className="leaderboard">leaderboard</div>
+			<div className="detail-page">
+				<h1 className="header">{this.props.project.projectName}</h1>
+				<div className="main-content">{this.renderTiles()}</div>
+				<div className="side-content">leaderboard</div>
 			</div>
 		);
 	}
@@ -33,6 +33,7 @@ class ProjectPage extends React.Component {
 
 const mapStateToProps = (state) => {
 	return {
+		auth: state.auth,
 		project: state.projects.viewProject,
 		tasks: state.tasks.tasks,
 	};

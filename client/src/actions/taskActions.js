@@ -17,3 +17,21 @@ export const getTasks = () => async (dispatch, getState) => {
 		dispatch({ type: TASK_ERROR, payload: e.message });
 	}
 };
+
+export const postTask = (taskInfo) => async (dispatch, getState) => {
+	const config = {
+		headers: {
+			"auth-token": getState().auth.authToken,
+		},
+	};
+	try {
+		const res = await axios.post(
+			"http://localhost:5000/task",
+			taskInfo,
+			config
+		);
+		dispatch({ type: POST_TASK, payload: res.data });
+	} catch (e) {
+		dispatch({ type: TASK_ERROR, payload: e.message });
+	}
+};

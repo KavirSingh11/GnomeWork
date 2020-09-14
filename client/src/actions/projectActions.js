@@ -27,20 +27,25 @@ export const getProjects = () => async (dispatch, getState) => {
 	}
 };
 
-export const postProject = (userData) => async (dispatch) => {
-	if (userData.type === 2) {
+export const postProject = (project) => async (dispatch, getState) => {
+	if (getState().auth.type === 2) {
 		dispatch({
 			type: PROJECT_ERROR,
 			payload: "must be project manager to post project",
 		});
 	}
-	const body = {
-		ownerID: userData.id,
-		projectName: userData.projectName,
-		projectMembers: userData.projectMembers,
+	const config = {
+		headers: {
+			"auth-token": getState().auth.authToken,
+		},
 	};
+
 	try {
-		const res = await axios.post("http://localhost:5000/project/", body);
+		const res = await axios.post(
+			"http://localhost:5000/project/",
+			project,
+			config
+		);
 		dispatch({ type: POST_PROJECT, payload: res.data });
 	} catch (e) {
 		dispatch({ type: PROJECT_ERROR, paylaod: e.message });

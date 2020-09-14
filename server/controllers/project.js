@@ -66,9 +66,9 @@ const verifyUser = async (req, res, next) => {
 	try {
 		if (user) {
 			res.status(200).send({
-				id: user._id,
+				userID: user._id,
 				userEmail: user.email,
-				name: user.name,
+				userName: user.name,
 				points: 0,
 			});
 		} else {

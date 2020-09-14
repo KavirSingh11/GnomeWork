@@ -28,6 +28,10 @@ class ProjectsDashboard extends React.Component {
 		await this.props.getUser(this.props.authToken);
 	}
 
+	createProject() {
+		this.props.history.push("/projects/create");
+	}
+
 	handleTileClick(project) {
 		this.props.setView(project);
 		this.props.history.push("/projects/view");
@@ -48,7 +52,16 @@ class ProjectsDashboard extends React.Component {
 	}
 
 	render() {
-		return <div className="tileboard">{this.renderTiles()}</div>;
+		return (
+			<div className="dashboard">
+				<div className="tileboard">{this.renderTiles()}</div>
+				{this.props.auth.type === 1 ? (
+					<div onClick={() => this.createProject()} className="add-project">
+						+
+					</div>
+				) : null}
+			</div>
+		);
 	}
 }
 

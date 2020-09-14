@@ -1,4 +1,4 @@
-.project-page {
+.detail-page {
 	height: 100%;
 	width: 100%;
 	background-color: #abd1b5;
@@ -7,27 +7,27 @@
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 	grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 	grid-template-areas:
-		"Title Title Title Title Title Title"
-		"Title Title Title Title Title Title"
-		"Tasks Tasks Tasks Tasks Leaderboard Leaderboard"
-		"Tasks Tasks Tasks Tasks Leaderboard Leaderboard"
-		"Tasks Tasks Tasks Tasks Leaderboard Leaderboard"
-		"Tasks Tasks Tasks Tasks Leaderboard Leaderboard"
-		"Tasks Tasks Tasks Tasks Leaderboard Leaderboard"
-		"Tasks Tasks Tasks Tasks Leaderboard Leaderboard"
-		"Tasks Tasks Tasks Tasks Leaderboard Leaderboard"
-		"Tasks Tasks Tasks Tasks Leaderboard Leaderboard"
-		"Tasks Tasks Tasks Tasks Leaderboard Leaderboard";
+		"header header header header header header"
+		"header header header header header header"
+		"main main main main side side"
+		"main main main main side side"
+		"main main main main side side"
+		"main main main main side side"
+		"main main main main side side"
+		"main main main main side side"
+		"main main main main side side"
+		"main main main main side side"
+		"main main main main side side";
 }
 
-.project-title {
-	grid-area: Title;
+.header {
+	grid-area: header;
 	margin: 0;
 	padding: 7rem 0 1rem 2rem;
 	border-bottom: 3px solid #291507;
 }
-.tile-board {
-	grid-area: Tasks;
+.main-content {
+	grid-area: main;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
@@ -46,6 +46,48 @@
 	max-height: 7rem;
 }
 
-.leaderboard {
-	grid-area: Leaderboard;
+.side-content {
+	grid-area: side;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.create {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+	grid-template-areas:
+		"sub-title sub-title sub-title sub-title"
+		"add-task add-task view-tasks view-tasks"
+		"add-task add-task view-tasks view-tasks"
+		"add-task add-task view-tasks view-tasks"
+		"add-task add-task view-tasks view-tasks";
+}
+.content-header {
+	grid-area: sub-title;
+	margin: 0;
+	padding-top: 2rem;
+}
+.input-task {
+	grid-area: add-task;
+}
+.view-tasks {
+	grid-area: view-tasks;
+}
+.new-member {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-top: 5rem;
+	width: 60%;
+
+	margin-bottom: 7rem;
+}
+.add-member {
+	display: inline-flex;
+	align-items: center;
+	font-size: 7rem;
+	float: right;
+	height: 3rem;
 }

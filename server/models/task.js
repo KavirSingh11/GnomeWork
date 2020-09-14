@@ -15,8 +15,10 @@ const TaskSchema = new mongoose.Schema({
 		type: Boolean,
 	},
 	assignedTo: {
-		type: String,
-		default: "Unassigned",
+		userID: { type: String, default: "Unassigned" },
+		userName: {
+			type: String,
+		},
 	},
 	pointVal: {
 		type: Number,

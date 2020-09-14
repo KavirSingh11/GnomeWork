@@ -1,3 +1,6 @@
+.dashboard {
+	height: 100%;
+}
 .tileboard {
 	height: 100%;
 	width: 100%;
@@ -20,4 +23,29 @@
 .tile:hover {
 	cursor: pointer;
 	transform: scale(1.1);
+}
+.add-project {
+	font-size: 7rem;
+	background-color: #79b791;
+	color: #edf4ed;
+	display: inline-flex;
+	padding: 1rem;
+	width: auto;
+	height: 3rem;
+	width: 3rem;
+	align-items: center;
+	border-radius: 5rem;
+	justify-content: center;
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	margin: 1.5rem;
+	transition: all 0.05s;
+}
+.add-project:hover {
+	cursor: pointer;
+	transform: scale(1.1);
+}
+.add-project:active {
+	transform: scale(1);
 }

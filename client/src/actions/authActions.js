@@ -31,7 +31,6 @@ export const getUser = (token) => async (dispatch) => {
 	try {
 		const res = await axios.get("http://localhost:5000/getUser", config);
 		dispatch({ type: GET_USER, payload: res.data });
-		console.log("user info fetched");
 	} catch (e) {
 		dispatch({ type: AUTH_ERROR, payload: e.message });
 	}

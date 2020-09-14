@@ -40,7 +40,7 @@
 	background-color: inherit;
 }
 .signout-button:hover {
-	background-color: grey;
+	background-color: #79b791;
 	color: white;
 	transform: none;
 }

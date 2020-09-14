@@ -23,7 +23,7 @@ const postTask = async (req, res, next) => {
 			flagComments: [],
 		});
 		await task.save();
-		res.status(200).send(`${req.body.taskName} saved`);
+		res.status(200).send(task);
 	} catch (e) {
 		res.status(500).send(`Error: ${e.message}`);
 	}

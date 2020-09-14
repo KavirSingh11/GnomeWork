@@ -11,6 +11,11 @@ export default function (state = INITIAL_STATE, action) {
 				...state,
 				tasks: action.payload,
 			};
+		case POST_TASK:
+			return {
+				...state,
+				tasks: [...state.tasks, action.payload],
+			};
 		default:
 			return state;
 	}
