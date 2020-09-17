@@ -7,7 +7,6 @@ const auth = require("./controllers/auth");
 const project = require("./controllers/project");
 const team = require("./controllers/team");
 const task = require("./controllers/task");
-const { getTasks } = require("./controllers/task");
 
 const requireAuth = passport.authenticate("jwt", { session: false });
 const verifySignIn = passport.authenticate("local", { session: false });
@@ -21,6 +20,8 @@ router.get("/project/:type/:userID", requireAuth, project.getProjects);
 
 router.post("/team", requireAuth, team.postTeam);
 router.get("/team/:type/:userID", requireAuth, team.getTeams);
+router.patch("/team/:type/:userID/:teamName", requireAuth, team.editTeam);
+router.delete("/team/:type/:userID/:teamname", requireAuth, team.deleteTeam);
 
 router.post("/task", requireAuth, task.postTask);
 router.get("/task/:projectID", requireAuth, task.getTasks);

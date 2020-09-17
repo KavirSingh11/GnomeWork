@@ -3,6 +3,7 @@ body,
 #root {
 	margin: 0;
 	height: 100%;
+	overflow: hidden;
 	font-family: "Raleway", sans-serif;
 }
 
@@ -31,7 +32,9 @@ a {
 	border-right: 3px solid #291507;
 	background-color: #214e34;
 	color: #abd1b5;
+	max-height: 100vh;
 }
 .content-panel {
 	background-color: #abd1b5;
+	max-height: 100vh;
 }

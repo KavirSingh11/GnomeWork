@@ -4,32 +4,21 @@ import { connect } from "react-redux";
 
 import { postTask } from "../../../actions/taskActions";
 import { postProject } from "../../../actions/projectActions";
+import "../../../css/createPage.css";
 class ProjectCreate extends React.Component {
 	state = {
 		projectID: "",
 		projectName: "",
-		members: [
-			{
-				userID: "5f55ce31026e9d64a0b14f59",
-				userEmail: "gnome2@gmail.com",
-				userName: "gnome2",
-				points: 0,
-			},
-			{
-				userID: "5f55ce37026e9d64a0b14f5a",
-				userEmail: "gnome3@gmail.com",
-				userName: "gnome3",
-				points: 0,
-			},
-		],
+		members: [],
 		tasks: [],
 		newTask: {
 			taskName: "",
 			assignedToID: "",
-			assignedToName: "",
+			assignedToName: "Unassigned",
 			pointVal: 0,
 		},
 		newEmail: "",
+		potentialTeam: {},
 	};
 
 	async addMember() {
@@ -63,7 +52,6 @@ class ProjectCreate extends React.Component {
 		await this.props.postProject(project);
 		const projectID = this.props.projects[this.props.projects.length - 1]
 			.projectID;
-		console.log(projectID);
 		this.state.tasks.forEach((task) => {
 			const body = {
 				projectID: projectID,
@@ -114,8 +102,51 @@ class ProjectCreate extends React.Component {
 		}
 	}
 
+	selectTeam(teamName) {
+		if (teamName === "no team") {
+			this.setState({ potentialTeam: {} });
+		} else {
+			const team = this.props.teams.filter((team) => {
+				return team.teamName === teamName;
+			});
+			this.setState({ potentialTeam: team[0] });
+		}
+	}
+	addTeam() {
+		console.log(this.state.potentialTeam.teamMembers);
+		if (!this.state.potentialTeam.teamMembers) {
+			this.setState({ members: [] });
+		} else {
+			const newMembers = [];
+			this.state.potentialTeam.teamMembers.forEach((member) => {
+				const newMember = {
+					userID: member.userID,
+					userEmail: member.userEmail,
+					userName: member.userName,
+					points: 0,
+				};
+				newMembers.push(newMember);
+			});
+
+			this.setState({ members: newMembers });
+		}
+	}
+
 	/*----------------------------------------------------------------------------------------------------
 	 */
+	renderTeams() {
+		if (!this.props.teams) {
+			return null;
+		}
+		return this.props.teams.map((team) => {
+			return (
+				<option key={team.teamName} value={team.teamName}>
+					{team.teamName}
+				</option>
+			);
+		});
+	}
+
 	renderAssignList() {
 		if (!this.state.members) {
 			return null;
@@ -135,7 +166,7 @@ class ProjectCreate extends React.Component {
 			return (
 				<div key={member.userID} className="member-options">
 					<div>{member.userName}</div>
-					<div>-</div>
+					<i className="remove-member fas fa-minus"></i>
 				</div>
 			);
 		});
@@ -144,9 +175,13 @@ class ProjectCreate extends React.Component {
 	renderTasks() {
 		return this.state.tasks.map((task) => {
 			return (
-				<div key={task.taskName}>
-					<div>{task.taskName}</div>
-					<div>{task.assignedToName}</div>
+				<div key={task.taskName} className="task-container">
+					<div className="task-info">
+						<div className="task-name">{task.taskName}</div>
+						<div className="task-assign">{task.assignedToName}</div>
+						<div className="task-points">{task.pointVal} Points</div>
+					</div>
+					<div className="task-remove">-</div>
 				</div>
 			);
 		});
@@ -159,7 +194,7 @@ class ProjectCreate extends React.Component {
 					<input
 						className="project-name"
 						type="text"
-						placeholder="Enter name"
+						placeholder="Project name"
 						onChange={(e) => this.setState({ projectName: e.target.value })}
 					/>
 				</div>
@@ -187,7 +222,7 @@ class ProjectCreate extends React.Component {
 							<option value="Unassigned">Unassigned</option>
 							{this.renderAssignList()}
 						</select>
-						<div>
+						<div className="points-container">
 							<input
 								type="number"
 								className="inputField points"
@@ -214,12 +249,13 @@ class ProjectCreate extends React.Component {
 								});
 								const resetNewTask = {
 									taskName: "",
-									assignedToID: "",
-									assignedToName: "",
+									assignedToID: this.state.newTask.assignedToID,
+									assignedToName: this.state.newTask.assignedToName,
 									pointVal: 0,
 								};
 								this.setState({ newTask: resetNewTask });
 							}}
+							className="add-task"
 						>
 							Add Task
 						</button>
@@ -228,10 +264,8 @@ class ProjectCreate extends React.Component {
 					<div></div>
 				</div>
 				<div className="side-content">
-					<div>
-						<h1>Add Members</h1>
-						{this.renderMembers()}
-					</div>
+					<h1 className="content-header">Add Members</h1>
+
 					<div className="new-member">
 						<input
 							type="email"
@@ -245,8 +279,28 @@ class ProjectCreate extends React.Component {
 							+
 						</div>
 					</div>
+					<div className="current-members">
+						<h3>Current Members</h3>
+						{this.renderMembers()}
+					</div>
+					<div className="select-team">
+						<h2>Select Team</h2>
+						<select
+							className="team-list"
+							onChange={(e) => this.selectTeam(e.target.value)}
+						>
+							<option value={"no team"}>No Team</option>
+							{this.renderTeams()}
+						</select>
+						<button
+							className="add-task add-team"
+							onClick={() => this.addTeam()}
+						>
+							Add Team
+						</button>
+					</div>
 				</div>
-				<div>
+				<div className="create-project">
 					<button onClick={() => this.createProject()}>Create</button>
 				</div>
 			</div>
@@ -258,6 +312,7 @@ const mapStateToProps = (state) => {
 	return {
 		auth: state.auth,
 		projects: state.projects.projects,
+		teams: state.teams.teams,
 	};
 };
 

@@ -33,14 +33,20 @@ const postTeam = async (req, res, next) => {
 				teamMembers: req.body.teamMembers,
 			});
 			await team.save();
-			res.status(200).send(`${teamName} added`);
+			res.status(200).send(team);
 		}
 	} catch (e) {
 		res.status(500).send(`Error: ${e.message}`);
 	}
 };
 
+const editTeam = async (req, res, next) => {};
+
+const deleteTeam = async (req, res, next) => {};
+
 module.exports = {
 	getTeams,
 	postTeam,
+	editTeam,
+	deleteTeam,
 };

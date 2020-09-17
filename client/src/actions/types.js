@@ -11,3 +11,8 @@ export const PROJECT_ERROR = "PROJECT_ERROR";
 export const GET_TASKS = "GET_TASKS";
 export const POST_TASK = "POST_TASK";
 export const TASK_ERROR = "TASK_ERROR";
+
+export const GET_TEAMS = "GET_TEAMS";
+export const POST_TEAM = "POST_TEAM";
+export const SET_VIEW_TEAM = "SET_VIEW_TEAM";
+export const TEAM_ERROR = "TEAM_ERROR";

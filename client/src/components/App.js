@@ -36,6 +36,7 @@ class App extends React.Component {
 const mapStateToProps = (state) => {
 	return {
 		authToken: state.auth.authToken,
+		userID: state.auth.userID,
 	};
 };
 

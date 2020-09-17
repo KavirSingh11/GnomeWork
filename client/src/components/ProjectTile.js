@@ -17,7 +17,9 @@ class ProjectTile extends React.Component {
 			<div className="tile" onClick={() => this.props.handleClick()}>
 				<h2 className="tile-title">{this.props.name}</h2>
 				<ul className="tile-list">{this.renderMembers()}</ul>
-				<h1 className="tile-completion">{this.props.completion}%</h1>
+				{this.props.completion ? (
+					<h1 className="tile-completion">{this.props.completion}%</h1>
+				) : null}
 			</div>
 		);
 	}

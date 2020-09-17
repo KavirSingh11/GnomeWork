@@ -15,6 +15,7 @@ import projectEdit from "./components/pages/projects/ProjectEdit";
 
 import teamsDashboard from "./components/pages/teams/TeamsDashboard";
 import teamPage from "./components/pages/teams/TeamPage";
+import teamCreate from "./components/pages/teams/TeamCreate";
 
 import history from "./history";
 
@@ -36,6 +37,7 @@ ReactDOM.render(
 				<Route path="/projects/create" component={projectCreate} />
 				<Route path="/teams/dashboard" component={teamsDashboard} />
 				<Route path="/teams/view" component={teamPage} />
+				<Route path="/teams/create" component={teamCreate} />
 			</App>
 		</BrowserRouter>
 	</Provider>,

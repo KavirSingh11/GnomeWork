@@ -1,0 +1,49 @@
+.create-team {
+	color: #edf4ed;
+}
+.input-member {
+	width: 25%;
+	background-color: rgb(33, 78, 52);
+	margin-top: 1rem;
+	margin-left: 2rem;
+	border-radius: 1rem;
+	padding: 0.5rem;
+}
+.new-email {
+	border-radius: 0.5rem;
+}
+.new-email:focus {
+	background-color: rgb(21, 53, 34);
+}
+
+.added-members {
+	height: 30%;
+	width: 40%;
+	margin: 2rem;
+	padding: 1rem;
+	border-radius: 1rem;
+	background-color: rgba(33, 78, 52, 0.7);
+	color: #edf4ed;
+}
+.member {
+	width: 50%;
+	display: inline-flex;
+	flex-direction: row;
+	justify-content: space-between;
+	background-color: #edf4ed;
+	padding: 1rem;
+	margin-bottom: 1rem;
+	border-radius: 0.5rem;
+	color: black;
+}
+
+.submit-team {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	margin: 2rem;
+	background-color: #0e3b43;
+}
+.submit-team:hover {
+	background-color: #0e3b43;
+}

@@ -1,16 +1,21 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import Tile from "../../TaskTile";
 import { getTasks } from "../../../actions/taskActions";
+import Tile from "../../TaskTile";
 import "../../../css/projectpage.css";
 class ProjectPage extends React.Component {
 	async componentDidMount() {
+		if (!this.props.project.projectName) {
+			this.props.history.push("/");
+		}
 		await this.getTasks();
 	}
 	async getTasks() {
 		await this.props.getTasks();
-		console.log("tasks fetched");
+	}
+	createProject() {
+		this.props.history.push("/projects/create");
 	}
 
 	renderTiles() {
@@ -26,6 +31,11 @@ class ProjectPage extends React.Component {
 				<h1 className="header">{this.props.project.projectName}</h1>
 				<div className="main-content">{this.renderTiles()}</div>
 				<div className="side-content">leaderboard</div>
+				{this.props.auth.type === 1 ? (
+					<div onClick={() => this.createProject()} className="add-project">
+						+
+					</div>
+				) : null}
 			</div>
 		);
 	}

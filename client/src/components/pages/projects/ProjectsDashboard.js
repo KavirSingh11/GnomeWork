@@ -8,6 +8,7 @@ import {
 	postProject,
 	setView,
 } from "../../../actions/projectActions";
+import { getTeams } from "../../../actions/teamActions";
 import requireSignin from "../../requireSignin";
 import "../../../css/projectdash.css";
 
@@ -19,6 +20,7 @@ class ProjectsDashboard extends React.Component {
 			await this.getUserInfo();
 		}
 		await this.getProjects();
+		await this.getTeams();
 	}
 
 	async getProjects() {
@@ -27,7 +29,9 @@ class ProjectsDashboard extends React.Component {
 	async getUserInfo() {
 		await this.props.getUser(this.props.authToken);
 	}
-
+	async getTeams() {
+		await this.props.getTeams();
+	}
 	createProject() {
 		this.props.history.push("/projects/create");
 	}
@@ -78,4 +82,5 @@ export default connect(mapStateToProps, {
 	postProject,
 	setView,
 	getUser,
+	getTeams,
 })(requireSignin(ProjectsDashboard));

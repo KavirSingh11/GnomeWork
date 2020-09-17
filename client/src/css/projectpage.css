@@ -5,9 +5,9 @@
 	color: aliceblue;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-	grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+	gap: 0px 0px;
 	grid-template-areas:
-		"header header header header header header"
 		"header header header header header header"
 		"main main main main side side"
 		"main main main main side side"
@@ -56,9 +56,16 @@
 .create {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr;
-	grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 	grid-template-areas:
 		"sub-title sub-title sub-title sub-title"
+		"add-task add-task view-tasks view-tasks"
+		"add-task add-task view-tasks view-tasks"
+		"add-task add-task view-tasks view-tasks"
+		"add-task add-task view-tasks view-tasks"
+		"add-task add-task view-tasks view-tasks"
+		"add-task add-task view-tasks view-tasks"
+		"add-task add-task view-tasks view-tasks"
 		"add-task add-task view-tasks view-tasks"
 		"add-task add-task view-tasks view-tasks"
 		"add-task add-task view-tasks view-tasks"
@@ -79,10 +86,7 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	margin-top: 5rem;
 	width: 60%;
-
-	margin-bottom: 7rem;
 }
 .add-member {
 	display: inline-flex;
