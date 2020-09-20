@@ -1,0 +1,35 @@
+.edit {
+	max-width: 100px;
+	background-color: #1f7585;
+	margin-right: 0.25rem;
+}
+.edit-task-points {
+	max-width: 0.5rem;
+}
+.current-members {
+	height: fit-content;
+}
+
+.team {
+	flex-direction: column;
+	justify-content: flex-start;
+}
+
+.add-email {
+	width: 40%;
+	max-width: 500px;
+	background-color: #1f7585;
+	margin: 2rem;
+	padding: 1rem;
+}
+.input-email {
+	background-color: #3095a7;
+}
+.input-email:focus {
+	background-color: #0e3b43;
+}
+.current-members {
+	width: 80%;
+	max-width: 800px;
+	margin-left: 2rem;
+}

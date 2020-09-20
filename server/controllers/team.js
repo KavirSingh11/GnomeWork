@@ -40,9 +40,33 @@ const postTeam = async (req, res, next) => {
 	}
 };
 
-const editTeam = async (req, res, next) => {};
+const editTeam = async (req, res, next) => {
+	const oldTeamName = req.body.oldTeamName;
+	const ownerID = req.params.ownerID;
+	const newInfo = req.body.newInfo;
+	Team.findOneAndUpdate({ ownerID: ownerID, teamName: oldTeamName }, newInfo)
+		.then((result) => res.json(result))
+		.catch((err) => res.status(500).json(`Error: ${err.message}`));
+};
 
-const deleteTeam = async (req, res, next) => {};
+const deleteTeam = async (req, res, next) => {
+	const teamName = req.params.teamName;
+	const ownerID = req.params.ownerID;
+	try {
+		await Team.findOneAndRemove(
+			{ ownerID: ownerID, teamName: teamName },
+			(err, _) => {
+				if (err) {
+					res.status(400).send(`Error: ${err}`);
+				} else {
+					res.status(400).send(`${teamName} removed`);
+				}
+			}
+		);
+	} catch (e) {
+		res.status(500).send(`Error: ${e.message}`);
+	}
+};
 
 module.exports = {
 	getTeams,

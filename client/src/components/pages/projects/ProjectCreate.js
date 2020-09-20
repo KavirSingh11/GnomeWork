@@ -8,7 +8,7 @@ import "../../../css/createPage.css";
 class ProjectCreate extends React.Component {
 	state = {
 		projectID: "",
-		projectName: "",
+		projectName: "Project Name",
 		members: [],
 		tasks: [],
 		newTask: {
@@ -64,6 +64,7 @@ class ProjectCreate extends React.Component {
 			};
 			this.uploadTask(body);
 		});
+		this.props.history.push("/");
 	}
 
 	async uploadTask(body) {
@@ -194,7 +195,7 @@ class ProjectCreate extends React.Component {
 					<input
 						className="project-name"
 						type="text"
-						placeholder="Project name"
+						defaultValue="Project name"
 						onChange={(e) => this.setState({ projectName: e.target.value })}
 					/>
 				</div>

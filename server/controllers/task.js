@@ -29,7 +29,57 @@ const postTask = async (req, res, next) => {
 	}
 };
 
+const editTask = (req, res, next) => {
+	const taskName = req.body.oldTaskName;
+	const projectID = req.params.projectID;
+	const newInfo = req.body.newInfo;
+
+	Task.findOneAndUpdate({ projectID: projectID, taskName: taskName }, newInfo)
+		.then((result) => res.json(result))
+		.catch((err) => res.status(500).json(`Error: ${err.message}`));
+};
+
+const deleteTask = async (req, res, next) => {
+	const taskName = req.params.taskName;
+	const projectID = req.params.projectID;
+
+	try {
+		await Task.findOneAndRemove(
+			{ projectID: projectID, taskName: taskName },
+			(err, _) => {
+				if (err) {
+					res.status(400).send(`Error: ${err}`);
+				} else {
+					res.status(200).send(`${taskName} removed`);
+				}
+			}
+		);
+	} catch (e) {
+		res.status(500).send(`Error: ${e.message}`);
+	}
+};
+
+const projectDeleted = async (req, res, next) => {
+	const projectID = req.params.projectID;
+	try {
+		await Task.deleteMany({ projectID: projectID }, (err, _) => {
+			if (err) {
+				res.status(400).send(`Error: ${err}`);
+			} else {
+				res
+					.status(200)
+					.send(`Tasks associated with project ${projectID} removed`);
+			}
+		});
+	} catch (e) {
+		res.status(500).send(`Error: ${e.message}`);
+	}
+};
+
 module.exports = {
 	postTask,
 	getTasks,
+	editTask,
+	projectDeleted,
+	deleteTask,
 };

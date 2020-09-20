@@ -1,6 +1,8 @@
 import {
 	GET_PROJECTS,
 	POST_PROJECT,
+	EDIT_PROJECT,
+	DELETE_PROJECT,
 	SET_VIEW_PROJECT,
 	PROJECT_ERROR,
 } from "../actions/types";
@@ -22,6 +24,10 @@ export default function (state = INITIAL_STATE, action) {
 				...state,
 				projects: [...state.projects, action.payload],
 			};
+		case EDIT_PROJECT:
+			return state;
+		case DELETE_PROJECT:
+			return state;
 		case PROJECT_ERROR:
 			return {
 				...state,

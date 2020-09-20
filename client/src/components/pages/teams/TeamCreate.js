@@ -42,7 +42,14 @@ class TeamCreate extends React.Component {
 		}
 		this.setState({ newEmail: "" });
 	}
-
+	removeMember(member) {
+		const newMembers = [...this.state.teamMembers];
+		const index = newMembers.indexOf(member);
+		if (index !== -1) {
+			newMembers.splice(index, 1);
+			this.setState({ teamMembers: newMembers });
+		}
+	}
 	async createTeam() {
 		const team = {
 			teamName: this.state.teamName,
@@ -58,7 +65,9 @@ class TeamCreate extends React.Component {
 			return (
 				<div className="member" key={member.userID}>
 					<div className="member-name">{member.userName}</div>
-					<i className="remove-member fas fa-minus"></i>
+					<button onClick={() => this.removeMember(member)}>
+						<i className="remove-member fas fa-minus"></i>
+					</button>
 				</div>
 			);
 		});
@@ -71,17 +80,17 @@ class TeamCreate extends React.Component {
 					<input
 						className="team-name"
 						type="text"
-						placeholder="Team name"
+						defaultValue="Team name"
 						onChange={(e) => this.setState({ teamName: e.target.value })}
 					/>
 				</div>
 				<div className="create-team">
 					<h1 className="content-header">Add Members to Team</h1>
-					<div className="input-member">
+					<div className="add-email">
 						<input
 							type="email"
 							placeholder="Email"
-							className="new-email"
+							className="input-email"
 							onChange={(e) => this.setState({ newEmail: e.target.value })}
 							value={this.state.newEmail}
 							onKeyPress={(e) => this.handleKeyPress(e)}
@@ -92,7 +101,7 @@ class TeamCreate extends React.Component {
 					</div>
 				</div>
 
-				<div className="added-members">
+				<div className="current-members">
 					<h2>Members</h2>
 					{this.renderMemberList()}
 				</div>

@@ -79,8 +79,35 @@ const verifyUser = async (req, res, next) => {
 	}
 };
 
+const editProject = (req, res, next) => {
+	const projectID = req.params.projectID;
+	const newInfo = req.body;
+
+	Project.findOneAndUpdate({ projectID: projectID }, newInfo)
+		.then((result) => res.json(result))
+		.catch((err) => res.status(500).json(`Error: ${err.message}`));
+};
+
+const deleteProject = async (req, res, next) => {
+	const projectID = req.params.projectID;
+
+	try {
+		await Project.findOneAndRemove({ projectID: projectID }, (err, _) => {
+			if (err) {
+				res.status(400).send(`Error: ${err}`);
+			} else {
+				res.status(200).send(`Project "${projectID}" removed`);
+			}
+		});
+	} catch (e) {
+		res.status(500).send(`Error: ${e.message}`);
+	}
+};
+
 module.exports = {
 	postProject,
 	getProjects,
+	editProject,
+	deleteProject,
 	verifyUser,
 };

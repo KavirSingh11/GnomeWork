@@ -22,9 +22,17 @@
 
 .header {
 	grid-area: header;
+	display: flex;
+	flex-direction: row;
 	margin: 0;
 	padding: 7rem 0 1rem 2rem;
 	border-bottom: 3px solid #291507;
+}
+.title {
+	margin-right: 3rem;
+}
+.edit-button {
+	height: 2rem;
 }
 .main-content {
 	grid-area: main;
@@ -34,13 +42,20 @@
 	justify-content: space-evenly;
 	border-right: 3px solid #291507;
 }
-
+.task-board {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	padding: 1rem;
+	height: 70%;
+	justify-content: space-between;
+}
 .task-tile {
 	margin-top: 2rem;
-
+	margin-right: 1rem;
 	background-color: #291507;
 	padding: 2em;
-	border-radius: 2rem;
+	border-radius: 0.75rem;
 	color: #edf4ed;
 	width: 10rem;
 	max-height: 7rem;

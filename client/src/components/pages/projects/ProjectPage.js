@@ -28,8 +28,18 @@ class ProjectPage extends React.Component {
 	render() {
 		return (
 			<div className="detail-page">
-				<h1 className="header">{this.props.project.projectName}</h1>
-				<div className="main-content">{this.renderTiles()}</div>
+				<div className="header">
+					<h1 className="title">{this.props.project.projectName}</h1>
+					<button
+						className="edit-button"
+						onClick={() => this.props.history.push("/projects/edit")}
+					>
+						<i className="far fa-edit"> </i>
+					</button>
+				</div>
+				<div className="main-content">
+					<div className="task-board">{this.renderTiles()}</div>
+				</div>
 				<div className="side-content">leaderboard</div>
 				{this.props.auth.type === 1 ? (
 					<div onClick={() => this.createProject()} className="add-project">

@@ -1,6 +1,8 @@
 import {
 	GET_TEAMS,
 	POST_TEAM,
+	EDIT_TEAM,
+	DELETE_TEAM,
 	TEAM_ERROR,
 	SET_VIEW_TEAM,
 } from "../actions/types";
@@ -23,6 +25,20 @@ export default function (state = INITIAL_STATE, action) {
 				...state,
 				teams: [...state.teams, action.payload],
 			};
+		case EDIT_TEAM: {
+			return {
+				...state,
+				teams: state.teams.map((team) =>
+					team.teamName === action.payload.teamName ? action.payload : team
+				),
+			};
+		}
+		case DELETE_TEAM: {
+			return {
+				...state,
+				teams: state.teams.filter((team) => team.teamName !== action.payload),
+			};
+		}
 		case SET_VIEW_TEAM:
 			return {
 				...state,
