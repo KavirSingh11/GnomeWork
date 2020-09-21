@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 
 import { postTeam } from "../../../actions/teamActions";
 import "../../../css/createTeam.css";
+import requireSignin from "../../requireSignin";
+
 class TeamCreate extends React.Component {
 	state = {
 		teamName: "",
@@ -119,4 +121,6 @@ const mapStateToProps = (state) => {
 	};
 };
 
-export default connect(mapStateToProps, { postTeam })(TeamCreate);
+export default connect(mapStateToProps, { postTeam })(
+	requireSignin(TeamCreate)
+);

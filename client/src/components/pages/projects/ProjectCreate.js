@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import { postTask } from "../../../actions/taskActions";
 import { postProject } from "../../../actions/projectActions";
 import "../../../css/createPage.css";
+import requireSignin from "../../requireSignin";
+
 class ProjectCreate extends React.Component {
 	state = {
 		projectID: "",
@@ -318,5 +320,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, { postProject, postTask })(
-	ProjectCreate
+	requireSignin(ProjectCreate)
 );

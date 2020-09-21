@@ -4,6 +4,7 @@ import axios from "axios";
 
 import { connect } from "react-redux";
 import { editTeam, deleteTeam } from "../../../actions/teamActions";
+import requireSignin from "../../requireSignin";
 import "../../../css/projectpage.css";
 
 class TeamPage extends React.Component {
@@ -137,4 +138,6 @@ const mapStateToProps = (state) => {
 	};
 };
 
-export default connect(mapStateToProps, { editTeam, deleteTeam })(TeamPage);
+export default connect(mapStateToProps, { editTeam, deleteTeam })(
+	requireSignin(TeamPage)
+);

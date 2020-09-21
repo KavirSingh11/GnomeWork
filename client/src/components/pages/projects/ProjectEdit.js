@@ -9,6 +9,8 @@ import {
 } from "../../../actions/projectActions";
 import { postTask, editTask, deleteTask } from "../../../actions/taskActions";
 import "../../../css/editPage.css";
+import requireSignin from "../../requireSignin";
+
 class ProjectEdit extends React.Component {
 	state = {
 		projectName: "",
@@ -222,7 +224,7 @@ class ProjectEdit extends React.Component {
 		}
 	}
 	async handleTaskEdit(button) {
-		if (button === "Enter") {
+		if (button === "Enter" || !button) {
 			var tempTasks = this.state.tasks;
 			const oldTaskName = tempTasks[this.state.indexOfEditTask].taskName;
 			const body = {
@@ -304,6 +306,9 @@ class ProjectEdit extends React.Component {
 							onKeyPress={(e) => this.handleTaskEdit(e.key)}
 						/>
 					</span>
+					<div className="add-member" onClick={() => this.handleTaskEdit()}>
+						+
+					</div>
 				</div>
 			</div>
 		);
@@ -437,4 +442,4 @@ export default connect(mapStateToProps, {
 	postTask,
 	editTask,
 	deleteTask,
-})(ProjectEdit);
+})(requireSignin(ProjectEdit));

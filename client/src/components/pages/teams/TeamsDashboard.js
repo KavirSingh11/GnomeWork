@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import ProjectTile from "../../ProjectTile";
 import { getUser } from "../../../actions/authActions";
 import { getTeams, postTeam, setViewTeam } from "../../../actions/teamActions";
+import requireSignin from "../../requireSignin";
+
 class TeamsDashboard extends React.Component {
 	async componentDidMount() {
 		if (this.props.auth.authToken && !this.props.auth.userID) {
@@ -66,4 +68,4 @@ export default connect(mapStateToProps, {
 	postTeam,
 	getUser,
 	setViewTeam,
-})(TeamsDashboard);
+})(requireSignin(TeamsDashboard));

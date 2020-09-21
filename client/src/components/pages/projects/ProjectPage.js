@@ -5,6 +5,8 @@ import { getTasks, postTask } from "../../../actions/taskActions";
 import Tile from "../../TaskTile";
 import Chart from "../../Chart";
 import "../../../css/projectpage.css";
+import requireSignin from "../../requireSignin";
+
 class ProjectPage extends React.Component {
 	state = {
 		tasks: [],
@@ -193,4 +195,6 @@ const mapStateToProps = (state) => {
 	};
 };
 
-export default connect(mapStateToProps, { getTasks, postTask })(ProjectPage);
+export default connect(mapStateToProps, { getTasks, postTask })(
+	requireSignin(ProjectPage)
+);

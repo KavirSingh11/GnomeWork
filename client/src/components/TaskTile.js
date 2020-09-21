@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { editTask } from "../actions/taskActions";
 import { editProject } from "../actions/projectActions";
 import "../css/taskTile.css";
+
 class TaskTile extends React.Component {
 	state = {
 		canSetToComplete: false, //either you are project owner or assigned to task
