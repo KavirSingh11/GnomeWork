@@ -1,4 +1,4 @@
-<h2>Check it out at <link href="https://floating-island-87573.herokuapp.com/signin" /> </h2>
+<h2>Check it out <a href="https://floating-island-87573.herokuapp.com/signin">here</a> </h2>
 <br/>
 
 <h1>GnomeWork</h1>
