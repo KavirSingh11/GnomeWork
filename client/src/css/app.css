@@ -2,8 +2,9 @@ html,
 body,
 #root {
 	margin: 0;
-	height: 100%;
-	overflow: hidden;
+	height: 100vh;
+	overflow-x: hidden;
+	overflow-y: auto;
 	font-family: "Raleway", sans-serif;
 }
 
@@ -32,7 +33,7 @@ a {
 	border-right: 3px solid #291507;
 	background-color: #214e34;
 	color: #abd1b5;
-	max-height: 100vh;
+	height: auto;
 }
 .content-panel {
 	background-color: #abd1b5;

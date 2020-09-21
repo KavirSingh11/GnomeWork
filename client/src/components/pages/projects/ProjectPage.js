@@ -1,15 +1,39 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { getTasks } from "../../../actions/taskActions";
+import { getTasks, postTask } from "../../../actions/taskActions";
 import Tile from "../../TaskTile";
+import Chart from "../../Chart";
 import "../../../css/projectpage.css";
 class ProjectPage extends React.Component {
+	state = {
+		tasks: [],
+		newTask: {
+			projectID: "",
+			taskName: "",
+			isComplete: false,
+			isFlagged: false,
+			assignedTo: {
+				userName: "",
+				userID: "",
+			},
+			pointVal: 0,
+			comments: [],
+			flagComments: [],
+		},
+	};
 	async componentDidMount() {
 		if (!this.props.project.projectName) {
 			this.props.history.push("/");
 		}
 		await this.getTasks();
+		await this.setState({
+			newTask: {
+				...this.state.newTask,
+				projectID: this.props.project.projectID,
+			},
+			tasks: this.props.tasks,
+		});
 	}
 	async getTasks() {
 		await this.props.getTasks();
@@ -17,10 +41,53 @@ class ProjectPage extends React.Component {
 	createProject() {
 		this.props.history.push("/projects/create");
 	}
+	async postTask() {
+		await this.props.postTask(this.state.newTask);
+	}
+	setNewTask(e) {
+		if (e.target.value === "Unassigned") {
+			this.setState({
+				newTask: {
+					...this.state.newTask,
+					assignedToName: "Unassigned",
+					assignedToID: "",
+				},
+			});
+		} else {
+			const user = this.props.project.projectMembers.filter((member) => {
+				return member.userID === e.target.value;
+			});
+			const assignTo = {
+				userID: user[0].userID,
+				userName: user[0].userName,
+			};
+			this.setState({
+				newTask: {
+					...this.state.newTask,
+					assignedTo: assignTo,
+				},
+			});
+		}
+	}
+
+	renderAssignList() {
+		const project = this.props.project;
+
+		if (!project.projectMembers) {
+			return null;
+		} else {
+			return project.projectMembers.map((member) => {
+				return (
+					<option key={member.userID} value={member.userID}>
+						{member.userName}
+					</option>
+				);
+			});
+		}
+	}
 
 	renderTiles() {
-		console.log("tiles rendered");
-		return this.props.tasks.map((task) => {
+		return this.state.tasks.map((task) => {
 			return <Tile key={task._id} task={task} />;
 		});
 	}
@@ -40,12 +107,79 @@ class ProjectPage extends React.Component {
 				<div className="main-content">
 					<div className="task-board">{this.renderTiles()}</div>
 				</div>
-				<div className="side-content">leaderboard</div>
-				{this.props.auth.type === 1 ? (
-					<div onClick={() => this.createProject()} className="add-project">
-						+
+				<div className="side-content project-page">
+					<div className="point-board">
+						<Chart
+							members={this.props.project.projectMembers.map(
+								(member) => member.userName
+							)}
+							points={this.props.project.projectMembers.map(
+								(member) => member.points
+							)}
+						/>
 					</div>
-				) : null}
+					<div className="input-task">
+						<input
+							type="text"
+							placeholder="Task name"
+							className="inputField name"
+							value={this.state.newTask.taskName}
+							onChange={(e) =>
+								this.setState({
+									newTask: {
+										...this.state.newTask,
+										taskName: e.target.value,
+									},
+								})
+							}
+						/>
+						<select
+							onChange={(e) => this.setNewTask(e)}
+							className="inputField assign"
+						>
+							<option value="Unassigned">Unassigned</option>
+							{this.renderAssignList()}
+						</select>
+						<div className="points-container">
+							<input
+								type="number"
+								className="inputField points"
+								value={this.state.newTask.pointVal}
+								onChange={(e) => {
+									var number = e.target.value;
+									if (!e.target.type === "number") {
+										number = parseInt(e.target.value);
+									}
+									this.setState({
+										newTask: {
+											...this.state.newTask,
+											pointVal: number,
+										},
+									});
+								}}
+							/>
+							Points
+						</div>
+						<button
+							onClick={() => {
+								this.setState({
+									tasks: [...this.state.tasks, this.state.newTask],
+								});
+								this.postTask();
+								const resetNewTask = {
+									taskName: "",
+									assignedToID: this.state.newTask.assignedToID,
+									assignedToName: this.state.newTask.assignedToName,
+									pointVal: 0,
+								};
+								this.setState({ newTask: resetNewTask });
+							}}
+							className="add-task"
+						>
+							Add Task
+						</button>
+					</div>
+				</div>
 			</div>
 		);
 	}
@@ -59,4 +193,4 @@ const mapStateToProps = (state) => {
 	};
 };
 
-export default connect(mapStateToProps, { getTasks })(ProjectPage);
+export default connect(mapStateToProps, { getTasks, postTask })(ProjectPage);
