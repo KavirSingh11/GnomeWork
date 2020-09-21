@@ -26,3 +26,46 @@
 	justify-content: center;
 	align-items: flex-end;
 }
+.showComments {
+	padding: 0.25rem;
+	display: flex;
+	flex-direction: column;
+}
+.add-comment {
+	height: auto;
+	padding: 0.25rem;
+}
+.post-comment {
+	padding: 0.1rem;
+	height: auto;
+	border-radius: 0;
+}
+.post-comment:hover {
+	transform: none;
+}
+
+.comment {
+	margin-top: 0.25rem;
+	display: flex;
+	flex-direction: column;
+}
+.comment-author {
+	margin: 0;
+}
+.comment-controls {
+	display: flex;
+	flex-direction: row;
+}
+.comment-content {
+	margin: 0;
+}
+.remove-comment {
+	padding: 0.25rem;
+	height: 1rem;
+	margin-left: 0.5rem;
+	background-color: inherit;
+	color: inherit;
+}
+.remove-comment:hover {
+	transform: none;
+}

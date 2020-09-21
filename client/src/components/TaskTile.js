@@ -181,36 +181,42 @@ class TaskTile extends React.Component {
 	renderFlagComments() {
 		const task = this.props.task;
 		return (
-			<div className="task-tile">
-				<input
-					type="text"
-					className="add-comment"
-					onChange={(e) => this.setState({ newComment: e.target.value })}
-					onKeyPress={(e) => {
-						if (e.key === "Enter") {
-							this.addFlagComment();
-						}
-					}}
-				/>
-				<button onClick={() => this.addFlagComment()}>
-					<i className="fas fa-plus"></i>
-				</button>
-
+			<div className="showComments task-tile">
+				<div>
+					<input
+						type="text"
+						className="add-comment"
+						onChange={(e) => this.setState({ newComment: e.target.value })}
+						onKeyPress={(e) => {
+							if (e.key === "Enter") {
+								this.addFlagComment();
+							}
+						}}
+					/>
+					<button
+						className="post-comment"
+						onClick={() => this.addFlagComment()}
+					>
+						<i className="fas fa-plus"></i>
+					</button>
+				</div>
 				{this.state.flagComments.map((comment) => {
 					return (
-						<div>
-							<h3>{comment.writtenBy}</h3>
-							<p>{comment.comment}</p>
-							{comment.writtenBy === this.props.auth.userName ||
-							this.props.auth.type === 1 ||
-							task.assignedTo.userName === this.props.auth.userName ? (
-								<button
-									onClick={() => this.removeFlagComment(comment)}
-									className="remove-comment"
-								>
-									<i className="fas fa-minus"></i>
-								</button>
-							) : null}
+						<div className="comment">
+							<h3 className="comment-author">{comment.writtenBy}</h3>
+							<div className="comment-controls">
+								<p className="comment-content">{comment.comment}</p>
+								{comment.writtenBy === this.props.auth.userName ||
+								this.props.auth.type === 1 ||
+								task.assignedTo.userName === this.props.auth.userName ? (
+									<button
+										onClick={() => this.removeFlagComment(comment)}
+										className="remove-comment"
+									>
+										<i className="fas fa-minus"></i>
+									</button>
+								) : null}
+							</div>
 						</div>
 					);
 				})}
@@ -220,35 +226,39 @@ class TaskTile extends React.Component {
 	renderComments() {
 		const task = this.props.task;
 		return (
-			<div className="task-tile">
-				<input
-					type="text"
-					className="add-comment"
-					onChange={(e) => this.setState({ newComment: e.target.value })}
-					onKeyPress={(e) => {
-						if (e.key === "Enter") {
-							this.addComment();
-						}
-					}}
-				/>
-				<button onClick={() => this.addComment()}>
-					<i className="fas fa-plus"></i>
-				</button>
+			<div className="showComments task-tile">
+				<div>
+					<input
+						type="text"
+						className="add-comment"
+						onChange={(e) => this.setState({ newComment: e.target.value })}
+						onKeyPress={(e) => {
+							if (e.key === "Enter") {
+								this.addComment();
+							}
+						}}
+					/>
 
+					<button className="post-comment" onClick={() => this.addComment()}>
+						<i className="fas fa-plus"></i>
+					</button>
+				</div>
 				{this.state.comments.map((comment) => {
 					return (
-						<div>
-							<h3>{comment.writtenBy}</h3>
-							<p>{comment.comment}</p>
-							{comment.writtenBy === this.props.auth.userName ||
-							this.props.auth.type === 1 ? (
-								<button
-									onClick={() => this.removeComment(comment)}
-									className="remove-comment"
-								>
-									<i className="fas fa-minus"></i>
-								</button>
-							) : null}
+						<div className="comment">
+							<h3 className="comment-author">{comment.writtenBy}</h3>
+							<div className="comment-controls">
+								<p className="comment-content">{comment.comment}</p>
+								{comment.writtenBy === this.props.auth.userName ||
+								this.props.auth.type === 1 ? (
+									<button
+										onClick={() => this.removeComment(comment)}
+										className="remove-comment"
+									>
+										<i className="fas fa-minus"></i>
+									</button>
+								) : null}
+							</div>
 						</div>
 					);
 				})}
@@ -290,7 +300,7 @@ class TaskTile extends React.Component {
 								showFlagComments: false,
 							})
 						}
-						className="task-mainButton"
+						className="taskButton task-mainButton"
 					>
 						<i className="fas fa-reply"></i>
 					</button>
@@ -302,7 +312,7 @@ class TaskTile extends React.Component {
 								showFlagComments: false,
 							})
 						}
-						className="task-commentButton"
+						className="taskButton task-commentButton"
 					>
 						<i className="far fa-comment"></i>
 					</button>
@@ -314,7 +324,7 @@ class TaskTile extends React.Component {
 								showFlagComments: true,
 							})
 						}
-						className="task-flagButton"
+						className="taskButton task-flagButton"
 					>
 						<i className="fas fa-exclamation-triangle"></i>
 					</button>
@@ -322,7 +332,7 @@ class TaskTile extends React.Component {
 						<div>
 							<button
 								onClick={() => this.completeTask()}
-								className="task-completeButton"
+								className="taskButton task-completeButton"
 							>
 								<i className="fas fa-check-circle"></i>
 							</button>
@@ -330,7 +340,7 @@ class TaskTile extends React.Component {
 							{this.props.task.assignedTo.userName !== "Unassigned" ? (
 								<button
 									onClick={() => this.unassignTask()}
-									className="task-completeButton"
+									className="taskButton task-completeButton"
 								>
 									<i className="fas fa-user-times"></i>
 								</button>
