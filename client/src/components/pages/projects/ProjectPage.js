@@ -23,11 +23,10 @@ class ProjectPage extends React.Component {
 			comments: [],
 			flagComments: [],
 		},
+		project: {},
 	};
 	async componentDidMount() {
-		if (!this.props.project.projectName) {
-			this.props.history.push("/");
-		}
+		await this.checkUserInfo();
 		await this.getTasks();
 		await this.setState({
 			newTask: {
@@ -35,7 +34,13 @@ class ProjectPage extends React.Component {
 				projectID: this.props.project.projectID,
 			},
 			tasks: this.props.tasks,
+			project: this.props.project,
 		});
+	}
+	checkUserInfo() {
+		if (!this.props.project.projectMembers) {
+			this.props.history.push("/");
+		}
 	}
 	async getTasks() {
 		await this.props.getTasks();
@@ -95,95 +100,102 @@ class ProjectPage extends React.Component {
 	}
 
 	render() {
-		return (
-			<div className="detail-page">
-				<div className="header">
-					<h1 className="title">{this.props.project.projectName}</h1>
-					<button
-						className="edit-button"
-						onClick={() => this.props.history.push("/projects/edit")}
-					>
-						<i className="far fa-edit"> </i>
-					</button>
-				</div>
-				<div className="main-content">
-					<div className="task-board">{this.renderTiles()}</div>
-				</div>
-				<div className="side-content project-page">
-					<div className="point-board">
-						<Chart
-							members={this.props.project.projectMembers.map(
-								(member) => member.userName
-							)}
-							points={this.props.project.projectMembers.map(
-								(member) => member.points
-							)}
-						/>
-					</div>
-					<div className="input-task">
-						<input
-							type="text"
-							placeholder="Task name"
-							className="inputField name"
-							value={this.state.newTask.taskName}
-							onChange={(e) =>
-								this.setState({
-									newTask: {
-										...this.state.newTask,
-										taskName: e.target.value,
-									},
-								})
-							}
-						/>
-						<select
-							onChange={(e) => this.setNewTask(e)}
-							className="inputField assign"
+		if (!this.state.project.projectMembers) {
+			return <div>Loading</div>;
+		}
+		if (this.state.project.projectMembers) {
+			return (
+				<div className="detail-page">
+					<div className="header">
+						<h1 className="title">{this.state.project.projectName}</h1>
+						<button
+							className="edit-button"
+							onClick={() => this.props.history.push("/projects/edit")}
 						>
-							<option value="Unassigned">Unassigned</option>
-							{this.renderAssignList()}
-						</select>
-						<div className="points-container">
+							<i className="far fa-edit"> </i>
+						</button>
+					</div>
+					<div className="main-content">
+						<div className="task-board">{this.renderTiles()}</div>
+					</div>
+					<div className="side-content project-page">
+						<div className="point-board">
+							<Chart
+								members={this.state.project.projectMembers.map(
+									(member) => member.userName
+								)}
+								points={this.state.project.projectMembers.map(
+									(member) => member.points
+								)}
+							/>
+						</div>
+						<div className="input-task">
 							<input
-								type="number"
-								className="inputField points"
-								value={this.state.newTask.pointVal}
-								onChange={(e) => {
-									var number = e.target.value;
-									if (!e.target.type === "number") {
-										number = parseInt(e.target.value);
-									}
+								type="text"
+								placeholder="Task name"
+								className="inputField name"
+								value={this.state.newTask.taskName}
+								onChange={(e) =>
 									this.setState({
 										newTask: {
 											...this.state.newTask,
-											pointVal: number,
+											taskName: e.target.value,
 										},
-									});
-								}}
+									})
+								}
 							/>
-							Points
+							<select
+								onChange={(e) => this.setNewTask(e)}
+								className="inputField assign"
+							>
+								<option value="Unassigned">Unassigned</option>
+								{this.renderAssignList()}
+							</select>
+							<div className="points-container">
+								<input
+									type="number"
+									className="inputField points"
+									value={this.state.newTask.pointVal}
+									onChange={(e) => {
+										var number = e.target.value;
+										if (!e.target.type === "number") {
+											number = parseInt(e.target.value);
+										}
+										this.setState({
+											newTask: {
+												...this.state.newTask,
+												pointVal: number,
+											},
+										});
+									}}
+								/>
+								Points
+							</div>
+							<button
+								onClick={() => {
+									this.setState({
+										tasks: [...this.state.tasks, this.state.newTask],
+									});
+									this.postTask();
+									const resetNewTask = {
+										taskName: "",
+										assignedToID: this.state.newTask.assignedToID,
+										assignedToName: this.state.newTask.assignedToName,
+										pointVal: 0,
+									};
+									this.setState({ newTask: resetNewTask });
+								}}
+								className="add-task"
+							>
+								Add Task
+							</button>
 						</div>
-						<button
-							onClick={() => {
-								this.setState({
-									tasks: [...this.state.tasks, this.state.newTask],
-								});
-								this.postTask();
-								const resetNewTask = {
-									taskName: "",
-									assignedToID: this.state.newTask.assignedToID,
-									assignedToName: this.state.newTask.assignedToName,
-									pointVal: 0,
-								};
-								this.setState({ newTask: resetNewTask });
-							}}
-							className="add-task"
-						>
-							Add Task
-						</button>
 					</div>
 				</div>
-			</div>
-		);
+			);
+		} else {
+			return <div>Error</div>;
+		}
 	}
 }
 

@@ -23,6 +23,7 @@ class TeamPage extends React.Component {
 			teamMembers: this.props.viewTeam.teamMembers,
 		});
 		if (!this.props.viewTeam.teamMembers) {
+			console.log(this.props.viewTeam.teamMembers);
 			this.props.history.push("/");
 		}
 	}

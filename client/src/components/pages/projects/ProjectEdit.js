@@ -32,12 +32,19 @@ class ProjectEdit extends React.Component {
 
 	//get project tasks
 	async componentDidMount() {
+		await this.checkUserInfo();
 		await this.setState({
 			projectName: this.props.viewProject.projectName,
 			projectID: this.props.viewProject.projectID,
 			members: this.props.viewProject.projectMembers,
 			tasks: this.props.tasks,
 		});
+	}
+
+	checkUserInfo() {
+		if (!this.props.viewProject.projectMembers) {
+			this.props.history.push("/");
+		}
 	}
 
 	async commitEdit() {
@@ -326,104 +333,111 @@ class ProjectEdit extends React.Component {
 		});
 	}
 	render() {
-		return (
-			<div className="detail-page">
-				<div className="header">
-					<input
-						className="project-name"
-						defaultValue={this.state.projectName}
-						onChange={(e) => {
-							this.setState({ projectName: e.target.value });
-						}}
-					/>
-					<button onClick={() => this.deleteProject()}>
-						<i className="far fa-trash-alt"></i>
-					</button>
-				</div>
-				<div className="main-content create">
-					<h1 className="content-header">Add A Task</h1>
-					<div className="input-task">
+		if (!this.state.projectName) {
+			return <div>Loading</div>;
+		}
+		if (this.state.projectName) {
+			return (
+				<div className="detail-page">
+					<div className="header">
 						<input
-							type="text"
-							placeholder="Task name"
-							className="inputField name"
-							value={this.state.newTask.taskName}
-							onChange={(e) =>
-								this.setState({
-									newTask: {
-										...this.state.newTask,
-										taskName: e.target.value,
-									},
-								})
-							}
+							className="project-name"
+							defaultValue={this.state.projectName}
+							onChange={(e) => {
+								this.setState({ projectName: e.target.value });
+							}}
 						/>
-						<select
-							onChange={(e) => this.setNewTask(e)}
-							className="inputField assign"
-						>
-							<option value="Unassigned">Unassigned</option>
-							{this.renderAssignList()}
-						</select>
-						<div className="points-container">
+						<button onClick={() => this.deleteProject()}>
+							<i className="far fa-trash-alt"></i>
+						</button>
+					</div>
+					<div className="main-content create">
+						<h1 className="content-header">Add A Task</h1>
+						<div className="input-task">
 							<input
-								type="number"
-								className="inputField points"
-								value={this.state.newTask.pointVal}
-								onChange={(e) => {
-									var number = e.target.value;
-									if (!e.target.type === "number") {
-										number = parseInt(e.target.value);
-									}
+								type="text"
+								placeholder="Task name"
+								className="inputField name"
+								value={this.state.newTask.taskName}
+								onChange={(e) =>
 									this.setState({
 										newTask: {
 											...this.state.newTask,
-											pointVal: number,
+											taskName: e.target.value,
 										},
-									});
-								}}
+									})
+								}
 							/>
-							Points
+							<select
+								onChange={(e) => this.setNewTask(e)}
+								className="inputField assign"
+							>
+								<option value="Unassigned">Unassigned</option>
+								{this.renderAssignList()}
+							</select>
+							<div className="points-container">
+								<input
+									type="number"
+									className="inputField points"
+									value={this.state.newTask.pointVal}
+									onChange={(e) => {
+										var number = e.target.value;
+										if (!e.target.type === "number") {
+											number = parseInt(e.target.value);
+										}
+										this.setState({
+											newTask: {
+												...this.state.newTask,
+												pointVal: number,
+											},
+										});
+									}}
+								/>
+								Points
+							</div>
+							<button
+								onClick={() => {
+									this.addTask();
+								}}
+								className="add-task"
+							>
+								Add Task
+							</button>
 						</div>
-						<button
-							onClick={() => {
-								this.addTask();
-							}}
-							className="add-task"
-						>
-							Add Task
-						</button>
+						<div className="view-tasks">
+							{this.renderTasks()}
+							{this.state.editTask.taskName ? this.renderEditField() : null}
+						</div>
 					</div>
-					<div className="view-tasks">
-						{this.renderTasks()}
-						{this.state.editTask.taskName ? this.renderEditField() : null}
-					</div>
-				</div>
-				<div className="side-content">
-					<h1 className="content-header">Edit Members</h1>
+					<div className="side-content">
+						<h1 className="content-header">Edit Members</h1>
 
-					<div className="new-member">
-						<input
-							type="email"
-							placeholder="Email"
-							className="new-email"
-							onChange={(e) => this.setState({ newEmail: e.target.value })}
-							value={this.state.newEmail}
-							onKeyPress={(e) => this.handleKeyPress(e)}
-						/>
-						<div className="add-member" onClick={() => this.addMember()}>
-							+
+						<div className="new-member">
+							<input
+								type="email"
+								placeholder="Email"
+								className="new-email"
+								onChange={(e) => this.setState({ newEmail: e.target.value })}
+								value={this.state.newEmail}
+								onKeyPress={(e) => this.handleKeyPress(e)}
+							/>
+							<div className="add-member" onClick={() => this.addMember()}>
+								+
+							</div>
+						</div>
+						<div className="current-members">
+							<h3>Current Members</h3>
+							{this.renderMembers()}
 						</div>
 					</div>
-					<div className="current-members">
-						<h3>Current Members</h3>
-						{this.renderMembers()}
+					<div className="create-project">
+						<button onClick={() => this.commitEdit()}>Finish Edit</button>
 					</div>
 				</div>
-				<div className="create-project">
-					<button onClick={() => this.commitEdit()}>Finish Edit</button>
-				</div>
-			</div>
-		);
+			);
+		} else {
+			return <div>Error</div>;
+		}
 	}
 }
 
