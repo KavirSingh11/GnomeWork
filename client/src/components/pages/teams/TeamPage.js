@@ -122,7 +122,6 @@ class TeamPage extends React.Component {
 					</div>
 					<div className="current-members">{this.renderTeam()}</div>
 				</div>
-				<div className="side-content">leaderboard</div>
 				<div className="create-project">
 					<button onClick={() => this.commitEdit()}>Commit Changes</button>
 				</div>

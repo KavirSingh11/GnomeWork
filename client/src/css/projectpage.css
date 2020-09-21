@@ -44,6 +44,9 @@
 	justify-content: space-evenly;
 	border-right: 3px solid #291507;
 }
+.team {
+	border-right: none !important;
+}
 .task-board {
 	overflow-x: hidden;
 	overflow-y: auto;
