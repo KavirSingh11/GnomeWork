@@ -1,4 +1,5 @@
 <h2>Check it out <a href="https://floating-island-87573.herokuapp.com">here</a> </h2>
+<p>You can use email: kavir.singh11@gmail.com and password: kavirPass to preview functionality</p>
 <br/>
 
 <h1>GnomeWork</h1>
